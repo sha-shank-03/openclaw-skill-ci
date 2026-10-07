@@ -1,18 +1,18 @@
 """Closed, synthetic log-summary workflow. Candidate Markdown/code never runs."""
 
-import json
-
-from .inputs import valid_virtual_path
+from .checks import action_denial
+from .inputs import digest
 from .json_values import json_equal
-from .model import Finding
-
-MAX_ACTIONS = 32
+from .limits import MAX_ACTIONS
+from .model import Finding, InputError
+from .parsing import parse_json
 
 
 def run_fixture(scenario, declarations, policy, trace):
     findings = []
     records = []
     sources = []
+    trace["contract"] = {"schema_version": 1, "actions": scenario["actions"], "expected": scenario["expected"]}
 
     def fail(rule, location, message, category="mock_behavior"):
         findings.append(Finding(rule, category, location, message))
@@ -25,16 +25,7 @@ def run_fixture(scenario, declarations, policy, trace):
         tool, path = action["tool"], action["path"]
         event = {"sequence": sequence, "tool": tool, "path": path, "outcome": "attempted"}
         trace["events"].append(event)
-        if not valid_virtual_path(path):
-            rule = "MOCK_PATH_INVALID"
-        elif tool not in declarations["tools"] or (tool == "read" and path not in declarations["read_paths"]):
-            rule = "PERMISSION_UNDECLARED"
-        elif tool not in policy["tools"] or (tool == "read" and path not in policy["read_paths"]):
-            rule = "PERMISSION_DENIED"
-        elif tool != "read":
-            rule = "MOCK_TOOL_UNAVAILABLE"
-        else:
-            rule = None
+        rule = action_denial(tool, path, declarations, policy)
         if rule:
             event.update(outcome="denied", rule=rule)
             category = "team_policy" if rule.startswith("PERMISSION_") else "mock_behavior"
@@ -47,14 +38,18 @@ def run_fixture(scenario, declarations, policy, trace):
             fail("MOCK_FILE_MISSING", f"actions[{sequence - 1}]", "No virtual file exists at the requested path.")
             break
         try:
-            rows = json.loads(scenario["files"][path])
+            content = scenario["files"][path]
+            rows = parse_json(content, "virtual log")
             if not isinstance(rows, list) or any(not isinstance(row, dict) or not isinstance(row.get("level"), str) for row in rows):
                 raise ValueError("expected log array")
-        except (ValueError, RecursionError):
+        except (ValueError, InputError, RecursionError):
             event.update(outcome="tool_error", rule="MOCK_LOG_INVALID")
             fail("MOCK_LOG_INVALID", f"actions[{sequence - 1}]", "Virtual log must contain JSON records with level strings.")
             break
         event.update(outcome="allowed", records_read=len(rows))
+        trace["observations"].append({"sequence": sequence, "records": len(rows),
+                                      "error_count": sum(row["level"] == "error" for row in rows),
+                                      "content_sha256": digest(content.encode("utf-8"))})
         records.extend(rows)
         sources.append(path)
     final = None

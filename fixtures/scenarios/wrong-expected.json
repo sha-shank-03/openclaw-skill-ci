@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "files": {"logs/events.json": "[{\"level\":\"info\",\"event\":\"fictional-start\"},{\"level\":\"error\",\"event\":\"fictional-timeout\"},{\"level\":\"warning\",\"event\":\"fictional-retry\"},{\"level\":\"error\",\"event\":\"fictional-unavailable\"}]"},
+  "actions": [{"tool": "read", "path": "logs/events.json"}],
+  "expected": {"error_count": 99, "records": 4, "sources": ["logs/events.json"]}
+}

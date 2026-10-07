@@ -1,13 +1,13 @@
 # Dependency and reference attribution
 
-M1 uses two pinned distributions from their official PyPI metadata, retrieved
+M1/M2 use two pinned distributions from their official PyPI metadata, retrieved
 2026-10-07. Installation uses binary wheels, SHA-256 checks, and no dependencies.
 There are no selected runtime transitive dependencies.
 
 | Distribution | License | Purpose / source |
 | --- | --- | --- |
 | PyYAML 6.0.3 | MIT; Copyright Ingy döt Net and Kirill Simonov | Canonical YAML parsing. [Version metadata](https://pypi.org/pypi/PyYAML/6.0.3/json), [official documentation](https://pyyaml.org/wiki/PyYAMLDocumentation). |
-| json5 0.12.1 | Apache-2.0 library; Copyright Google Inc. | Pinned for accepted M2 JSON5 metadata parsing; installed but not invoked in M1. [Version metadata](https://pypi.org/pypi/json5/0.12.1/json), [pinned source](https://github.com/dpranke/pyjson5/tree/v0.12.1). |
+| json5 0.12.1 | Apache-2.0 library; Copyright Google Inc. | M2 JSON5 metadata parsing; installed but not invoked in historical M1. [Version metadata](https://pypi.org/pypi/json5/0.12.1/json), [pinned source](https://github.com/dpranke/pyjson5/tree/v0.12.1). |
 
 Full license records extracted from the actually downloaded wheels are in
 `licenses/PyYAML-6.0.3.txt` and `licenses/json5-0.12.1.txt`. json5's license record
@@ -28,4 +28,5 @@ Official reference material, read during planning, is linked and paraphrased:
 
 Examples and fixtures are independently authored fictional content under MIT-0.
 OpenClaw is an external project; no endorsement, affiliation, or security
-certification is claimed. Planned GitHub Actions are not installed or used in M1.
+certification is claimed. Planned GitHub Actions are deferred to M3 and are not
+installed or used in M1/M2.

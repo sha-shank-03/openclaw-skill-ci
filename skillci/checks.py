@@ -36,3 +36,16 @@ def check_declarations(declarations, policy):
             findings.append(Finding("PERMISSION_DECLARATION_DENIED", "team_policy", "skill-ci.json:" + field,
                                     "Declared authority exceeds the independently selected team policy."))
     return findings
+
+
+def action_denial(tool, path, declarations, policy):
+    from .inputs import valid_virtual_path
+    if not valid_virtual_path(path):
+        return "MOCK_PATH_INVALID"
+    if tool not in declarations["tools"] or (tool == "read" and path not in declarations["read_paths"]):
+        return "PERMISSION_UNDECLARED"
+    if tool not in policy["tools"] or (tool == "read" and path not in policy["read_paths"]):
+        return "PERMISSION_DENIED"
+    if tool != "read":
+        return "MOCK_TOOL_UNAVAILABLE"
+    return None
