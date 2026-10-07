@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "platform": "win32",
+  "bins": ["python"],
+  "env_names": [],
+  "config": {"browser.enabled": true}
+}

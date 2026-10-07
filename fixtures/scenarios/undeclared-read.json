@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "files": {"logs/private.json": "[{\"level\":\"error\"}]"},
+  "actions": [{"tool": "read", "path": "logs/private.json"}],
+  "expected": {"error_count": 1, "records": 1, "sources": ["logs/private.json"]}
+}

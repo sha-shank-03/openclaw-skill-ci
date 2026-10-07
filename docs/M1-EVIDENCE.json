@@ -1,0 +1,329 @@
+{
+  "execution_kind": "mock_fixture",
+  "milestone": "M1",
+  "model_execution": false,
+  "platform": "win32",
+  "python": "3.11.9",
+  "recorded_date": "2026-10-07",
+  "results": [
+    {
+      "actual_argv": [
+        "C:\\Users\\shash\\Documents\\CodexPortfolios\\agentic-ai-2026-10-07\\openclaw-skill-ci\\.venv\\Scripts\\python.exe",
+        "-m",
+        "skillci",
+        "check",
+        "examples/passing/log-summary",
+        "--environment",
+        "fixtures/environments/ready.json",
+        "--policy",
+        "fixtures/policies/read-only.json",
+        "--out",
+        "work/quickstart/check"
+      ],
+      "case": "check",
+      "command": ".\\.venv\\Scripts\\python.exe -m skillci check examples/passing/log-summary --environment fixtures/environments/ready.json --policy fixtures/policies/read-only.json --out work/quickstart/check",
+      "exit_code": 0,
+      "report": {
+        "adapter_invocations": 0,
+        "execution_kind": "static",
+        "exit_code": 0,
+        "findings": [],
+        "fixture_state": "not_requested",
+        "input_hashes": {
+          "SKILL.md": "c6ad7b478cddc943fe77c222b009673885a791202f20e02169ee95537280128b",
+          "environment": "6a918c69bb5497dbba53ee8e7d3e738edac1c347a7f2af232b03034888ca7994",
+          "policy": "fbb858ee4f9ff91be5e591ee27d4450c9d760b32025faff5dafb7ce63b8c238e",
+          "skill-ci.json": "65b9f7918c2562988110e97c2f6f3eef3f00e75d33f3ae5225b5dbcf82ae5f80"
+        },
+        "inspected_bundle_sha256": "1aa35533e67be52000d72dd12054c257b3393f4b98764dfce7aeda98860794a1",
+        "inspected_files": [
+          "SKILL.md",
+          "skill-ci.json"
+        ],
+        "milestone": "M1",
+        "model_execution": false,
+        "openclaw_commit": "fc23bc864e4553c2d215e479eeec47b67a0bf943",
+        "openclaw_version": "2026.9.8",
+        "profile": "openclaw-portable-m1",
+        "schema_version": 1,
+        "simulated_eligibility": true,
+        "status": "pass",
+        "summary": null,
+        "tool_version": "0.1.0"
+      },
+      "report_sha256": "e463e3e925afde6ec84d6adaeccf783efee99ad5a6cee2d6bb62e90d46a89eae",
+      "stderr": "",
+      "stdout": "PASS execution_kind=static model_execution=false\nsimulated_eligibility=true fixture_state=not_requested adapter_invocations=0\n",
+      "trace": null
+    },
+    {
+      "actual_argv": [
+        "C:\\Users\\shash\\Documents\\CodexPortfolios\\agentic-ai-2026-10-07\\openclaw-skill-ci\\.venv\\Scripts\\python.exe",
+        "-m",
+        "skillci",
+        "run-fixture",
+        "examples/passing/log-summary",
+        "--environment",
+        "fixtures/environments/ready.json",
+        "--policy",
+        "fixtures/policies/read-only.json",
+        "--scenario",
+        "fixtures/scenarios/summary-pass.json",
+        "--out",
+        "work/quickstart/passing"
+      ],
+      "case": "passing",
+      "command": ".\\.venv\\Scripts\\python.exe -m skillci run-fixture examples/passing/log-summary --environment fixtures/environments/ready.json --policy fixtures/policies/read-only.json --scenario fixtures/scenarios/summary-pass.json --out work/quickstart/passing",
+      "exit_code": 0,
+      "report": {
+        "adapter_invocations": 1,
+        "execution_kind": "mock_fixture",
+        "exit_code": 0,
+        "findings": [],
+        "fixture_state": "completed",
+        "input_hashes": {
+          "SKILL.md": "c6ad7b478cddc943fe77c222b009673885a791202f20e02169ee95537280128b",
+          "environment": "6a918c69bb5497dbba53ee8e7d3e738edac1c347a7f2af232b03034888ca7994",
+          "policy": "fbb858ee4f9ff91be5e591ee27d4450c9d760b32025faff5dafb7ce63b8c238e",
+          "scenario": "68065f570823a5df20a870d7b1e0138d2abefbc341907390771f9398ce158275",
+          "skill-ci.json": "65b9f7918c2562988110e97c2f6f3eef3f00e75d33f3ae5225b5dbcf82ae5f80"
+        },
+        "inspected_bundle_sha256": "1aa35533e67be52000d72dd12054c257b3393f4b98764dfce7aeda98860794a1",
+        "inspected_files": [
+          "SKILL.md",
+          "skill-ci.json"
+        ],
+        "milestone": "M1",
+        "model_execution": false,
+        "openclaw_commit": "fc23bc864e4553c2d215e479eeec47b67a0bf943",
+        "openclaw_version": "2026.9.8",
+        "profile": "openclaw-portable-m1",
+        "schema_version": 1,
+        "simulated_eligibility": true,
+        "status": "pass",
+        "summary": {
+          "error_count": 2,
+          "records": 4,
+          "sources": [
+            "logs/events.json"
+          ]
+        },
+        "tool_version": "0.1.0"
+      },
+      "report_sha256": "3bf980f53a2d2baa439111bdeeb5c9bcdd0297a790a47361ec4bd5e1b824bcd0",
+      "stderr": "",
+      "stdout": "PASS execution_kind=mock_fixture model_execution=false\nsimulated_eligibility=true fixture_state=completed adapter_invocations=1\nsummary={\"error_count\": 2, \"records\": 4, \"sources\": [\"logs/events.json\"]}\n",
+      "trace": {
+        "adapter_invocations": 1,
+        "events": [
+          {
+            "outcome": "allowed",
+            "path": "logs/events.json",
+            "records_read": 4,
+            "sequence": 1,
+            "tool": "read"
+          }
+        ],
+        "execution_kind": "mock_fixture",
+        "final": {
+          "error_count": 2,
+          "records": 4,
+          "sources": [
+            "logs/events.json"
+          ]
+        },
+        "input_hashes": {
+          "SKILL.md": "c6ad7b478cddc943fe77c222b009673885a791202f20e02169ee95537280128b",
+          "environment": "6a918c69bb5497dbba53ee8e7d3e738edac1c347a7f2af232b03034888ca7994",
+          "policy": "fbb858ee4f9ff91be5e591ee27d4450c9d760b32025faff5dafb7ce63b8c238e",
+          "scenario": "68065f570823a5df20a870d7b1e0138d2abefbc341907390771f9398ce158275",
+          "skill-ci.json": "65b9f7918c2562988110e97c2f6f3eef3f00e75d33f3ae5225b5dbcf82ae5f80"
+        },
+        "model_execution": false,
+        "schema_version": 1,
+        "state": "completed",
+        "trace_origin": "synthetic_mock"
+      }
+    },
+    {
+      "actual_argv": [
+        "C:\\Users\\shash\\Documents\\CodexPortfolios\\agentic-ai-2026-10-07\\openclaw-skill-ci\\.venv\\Scripts\\python.exe",
+        "-m",
+        "skillci",
+        "run-fixture",
+        "examples/failing/missing-tool",
+        "--environment",
+        "fixtures/environments/ready.json",
+        "--policy",
+        "fixtures/policies/read-only.json",
+        "--scenario",
+        "fixtures/scenarios/summary-pass.json",
+        "--out",
+        "work/quickstart/missing"
+      ],
+      "case": "missing",
+      "command": ".\\.venv\\Scripts\\python.exe -m skillci run-fixture examples/failing/missing-tool --environment fixtures/environments/ready.json --policy fixtures/policies/read-only.json --scenario fixtures/scenarios/summary-pass.json --out work/quickstart/missing",
+      "exit_code": 1,
+      "report": {
+        "adapter_invocations": 0,
+        "execution_kind": "mock_fixture",
+        "exit_code": 1,
+        "findings": [
+          {
+            "category": "eligibility_simulation",
+            "location": "requires.bins",
+            "message": "Fixture lacks required binary: fictional-log-cli.",
+            "rule": "DEP_MISSING_BIN",
+            "severity": "error"
+          }
+        ],
+        "fixture_state": "blocked",
+        "input_hashes": {
+          "SKILL.md": "85f07b1501cdc5b57437e576b67034218005014b96581366139a57a8198b12a4",
+          "environment": "6a918c69bb5497dbba53ee8e7d3e738edac1c347a7f2af232b03034888ca7994",
+          "policy": "fbb858ee4f9ff91be5e591ee27d4450c9d760b32025faff5dafb7ce63b8c238e",
+          "skill-ci.json": "65b9f7918c2562988110e97c2f6f3eef3f00e75d33f3ae5225b5dbcf82ae5f80"
+        },
+        "inspected_bundle_sha256": "97dcb82da29bb44377c5bd1a95697118f778f3e4ccb7c66e7a6c4c9093a93c3d",
+        "inspected_files": [
+          "SKILL.md",
+          "skill-ci.json"
+        ],
+        "milestone": "M1",
+        "model_execution": false,
+        "openclaw_commit": "fc23bc864e4553c2d215e479eeec47b67a0bf943",
+        "openclaw_version": "2026.9.8",
+        "profile": "openclaw-portable-m1",
+        "schema_version": 1,
+        "simulated_eligibility": false,
+        "status": "fail",
+        "summary": null,
+        "tool_version": "0.1.0"
+      },
+      "report_sha256": "f88a5655a2cccc1ef31324bd1c55891ccf6dde279382bebe97e548a0997c8bfe",
+      "stderr": "",
+      "stdout": "FAIL execution_kind=mock_fixture model_execution=false\nsimulated_eligibility=false fixture_state=blocked adapter_invocations=0\nERROR DEP_MISSING_BIN category=eligibility_simulation location=\"requires.bins\"\n",
+      "trace": {
+        "adapter_invocations": 0,
+        "events": [],
+        "execution_kind": "mock_fixture",
+        "final": null,
+        "input_hashes": {
+          "SKILL.md": "85f07b1501cdc5b57437e576b67034218005014b96581366139a57a8198b12a4",
+          "environment": "6a918c69bb5497dbba53ee8e7d3e738edac1c347a7f2af232b03034888ca7994",
+          "policy": "fbb858ee4f9ff91be5e591ee27d4450c9d760b32025faff5dafb7ce63b8c238e",
+          "skill-ci.json": "65b9f7918c2562988110e97c2f6f3eef3f00e75d33f3ae5225b5dbcf82ae5f80"
+        },
+        "model_execution": false,
+        "schema_version": 1,
+        "state": "blocked",
+        "trace_origin": "synthetic_mock"
+      }
+    },
+    {
+      "actual_argv": [
+        "C:\\Users\\shash\\Documents\\CodexPortfolios\\agentic-ai-2026-10-07\\openclaw-skill-ci\\.venv\\Scripts\\python.exe",
+        "-m",
+        "skillci",
+        "run-fixture",
+        "examples/passing/log-summary",
+        "--environment",
+        "fixtures/environments/ready.json",
+        "--policy",
+        "fixtures/policies/read-only.json",
+        "--scenario",
+        "fixtures/scenarios/undeclared-read.json",
+        "--out",
+        "work/quickstart/undeclared"
+      ],
+      "case": "undeclared",
+      "command": ".\\.venv\\Scripts\\python.exe -m skillci run-fixture examples/passing/log-summary --environment fixtures/environments/ready.json --policy fixtures/policies/read-only.json --scenario fixtures/scenarios/undeclared-read.json --out work/quickstart/undeclared",
+      "exit_code": 1,
+      "report": {
+        "adapter_invocations": 0,
+        "execution_kind": "mock_fixture",
+        "exit_code": 1,
+        "findings": [
+          {
+            "category": "team_policy",
+            "location": "actions[0]",
+            "message": "Action rejected before adapter invocation.",
+            "rule": "PERMISSION_UNDECLARED",
+            "severity": "error"
+          }
+        ],
+        "fixture_state": "failed",
+        "input_hashes": {
+          "SKILL.md": "c6ad7b478cddc943fe77c222b009673885a791202f20e02169ee95537280128b",
+          "environment": "6a918c69bb5497dbba53ee8e7d3e738edac1c347a7f2af232b03034888ca7994",
+          "policy": "fbb858ee4f9ff91be5e591ee27d4450c9d760b32025faff5dafb7ce63b8c238e",
+          "scenario": "50c81db8ae12c53589d65ddaddd5fd9534de9535c6255565fbbb1b25008b65bb",
+          "skill-ci.json": "65b9f7918c2562988110e97c2f6f3eef3f00e75d33f3ae5225b5dbcf82ae5f80"
+        },
+        "inspected_bundle_sha256": "1aa35533e67be52000d72dd12054c257b3393f4b98764dfce7aeda98860794a1",
+        "inspected_files": [
+          "SKILL.md",
+          "skill-ci.json"
+        ],
+        "milestone": "M1",
+        "model_execution": false,
+        "openclaw_commit": "fc23bc864e4553c2d215e479eeec47b67a0bf943",
+        "openclaw_version": "2026.9.8",
+        "profile": "openclaw-portable-m1",
+        "schema_version": 1,
+        "simulated_eligibility": true,
+        "status": "fail",
+        "summary": null,
+        "tool_version": "0.1.0"
+      },
+      "report_sha256": "1f526664db1cf71bfa45c780286bd808f5363d73134825b0b6cdff525cdf39c6",
+      "stderr": "",
+      "stdout": "FAIL execution_kind=mock_fixture model_execution=false\nsimulated_eligibility=true fixture_state=failed adapter_invocations=0\nERROR PERMISSION_UNDECLARED category=team_policy location=\"actions[0]\"\n",
+      "trace": {
+        "adapter_invocations": 0,
+        "events": [
+          {
+            "outcome": "denied",
+            "path": "logs/private.json",
+            "rule": "PERMISSION_UNDECLARED",
+            "sequence": 1,
+            "tool": "read"
+          }
+        ],
+        "execution_kind": "mock_fixture",
+        "final": null,
+        "input_hashes": {
+          "SKILL.md": "c6ad7b478cddc943fe77c222b009673885a791202f20e02169ee95537280128b",
+          "environment": "6a918c69bb5497dbba53ee8e7d3e738edac1c347a7f2af232b03034888ca7994",
+          "policy": "fbb858ee4f9ff91be5e591ee27d4450c9d760b32025faff5dafb7ce63b8c238e",
+          "scenario": "50c81db8ae12c53589d65ddaddd5fd9534de9535c6255565fbbb1b25008b65bb",
+          "skill-ci.json": "65b9f7918c2562988110e97c2f6f3eef3f00e75d33f3ae5225b5dbcf82ae5f80"
+        },
+        "model_execution": false,
+        "schema_version": 1,
+        "state": "failed",
+        "trace_origin": "synthetic_mock"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "source_hashes": {
+    "skillci/__init__.py": "979fbb1855cad40405da7f7445cc24596e24ff1a03cc6c4faaee9430a16c8dcb",
+    "skillci/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "skillci/checks.py": "45b9145c8b63493862a442cb94128bab0714a5c761f2cd1b81389966c36c0e53",
+    "skillci/cli.py": "b404a7b1be296093ce7f944d305b9825f7d82254657f18e2b44de64d81ff3a1d",
+    "skillci/harness.py": "449b4a57fe060012a18c42ef38630d7f5059f7d7517c324fcdc02d9036283bf7",
+    "skillci/inputs.py": "1a063a33e065cf488f410e0b68da723a2ccb335a42c82f9c7a0d626c269cab39",
+    "skillci/manifest.py": "42e5a22401259abda50357f647dfa660359e5a0883d3f039e2d20922e1394474",
+    "skillci/model.py": "cf561071a4615f52a0ff0589b3eb65ea59446f9cbf8a968067428c159cf83b1c",
+    "skillci/report.py": "e2187c7d567d4188abc8e295dfb60c6df57a6ede383c1ef3197e01b53c9616ec",
+    "tests/test_m1.py": "63f2bfc2e8f0e53cd75904a6ce504bab21547153f9e293f9761d9ee21d64c333"
+  },
+  "unit_tests": {
+    "command": ".\\.venv\\Scripts\\python.exe -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "stderr": "test_bad_caller_input_is_exit_two_with_report (test_m1.CliAcceptance.test_bad_caller_input_is_exit_two_with_report) ... ok\ntest_missing_binary_blocks_mock_before_adapter (test_m1.CliAcceptance.test_missing_binary_blocks_mock_before_adapter) ... ok\ntest_passing_summary_is_mock_and_counts_fixture_records (test_m1.CliAcceptance.test_passing_summary_is_mock_and_counts_fixture_records) ... ok\ntest_selected_policy_rejects_candidate_declarations (test_m1.CliAcceptance.test_selected_policy_rejects_candidate_declarations) ... ok\ntest_static_check_does_not_run_a_workflow (test_m1.CliAcceptance.test_static_check_does_not_run_a_workflow) ... ok\ntest_undeclared_read_is_denied_before_adapter (test_m1.CliAcceptance.test_undeclared_read_is_denied_before_adapter) ... ok\ntest_wrong_expected_output_fails_without_rewriting_expectation (test_m1.CliAcceptance.test_wrong_expected_output_fails_without_rewriting_expectation) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 1.628s\n\nOK\n",
+    "stdout": ""
+  },
+  "working_directory": "C:\\Users\\shash\\Documents\\CodexPortfolios\\agentic-ai-2026-10-07\\openclaw-skill-ci"
+}

@@ -1,0 +1,6 @@
+# Python 3.11 wheels: Windows AMD64 and Linux x86_64. No source builds.
+PyYAML==6.0.3 \
+    --hash=sha256:9f3bfb4965eb874431221a3ff3fdcddc7e74e3b07799e0e84ca4a0f867d449bf \
+    --hash=sha256:b8bb0864c5a28024fac8a632c443c87c5aa6f215c0b126c449ae1a150412f31d
+json5==0.12.1 \
+    --hash=sha256:d9c9b3bc34a5f54d43c35e11ef7cb87d8bdd098c6ace87117a7b7e83e705c1d5
