@@ -36,6 +36,15 @@ The expected summary is independently specified by the scenario and is not
 rewritten to match the result. Output comparison can fail even after permitted
 reads succeed. `model_execution=false` appears in both reports and traces.
 
+Comparison explicitly follows JSON value categories recursively. A boolean is
+distinct from a number even inside objects/arrays, avoiding Python's `False == 0`
+and `True == 1` coercion. Objects compare the same key sets without ordering;
+arrays compare length and position. Finite integer/float numbers compare their
+parsed Python numeric values exactly without a tolerance, so `0` matches `0.0`.
+Decimal/exponent values use binary floats; this is not arbitrary-precision
+decimal comparison. The caller-selected JSON reader rejects NaN/Infinity and
+finite-token overflow to infinity (for example `1e999`) before the workflow.
+
 `manifest.py` uses restricted PyYAML SafeLoader behavior and canonical nested
 metadata. These are portable-profile rules, not an exact port of OpenClaw's
 permissive loader. Native YAML/encoding failures are identified separately from

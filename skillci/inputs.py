@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import math
 import stat
 from pathlib import Path
 
@@ -44,13 +45,21 @@ def _reject_constant(value):
     raise ValueError("non-finite JSON")
 
 
+def _finite_float(token):
+    value = float(token)
+    if not math.isfinite(value):
+        raise ValueError("non-finite JSON number")
+    return value
+
+
 def read_json(path):
     data = read_bytes(path)
     try:
         result = json.loads(data.decode("utf-8"), object_pairs_hook=_unique_pairs,
-                            parse_constant=_reject_constant)
+                            parse_constant=_reject_constant, parse_float=_finite_float)
     except (UnicodeError, ValueError, RecursionError):
-        raise InputError("INPUT_JSON", Path(path).name, "Expected valid UTF-8 JSON with unique keys.") from None
+        raise InputError("INPUT_JSON", Path(path).name,
+                         "Expected valid UTF-8 JSON with unique keys and finite numbers.") from None
     return result, digest(data)
 
 

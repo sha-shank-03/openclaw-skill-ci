@@ -7,6 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from skillci.json_values import json_equal
+
 ROOT = Path(__file__).resolve().parents[1]
 PASSING = ROOT / "examples/passing/log-summary"
 FAILING = ROOT / "examples/failing/missing-tool"
@@ -109,6 +111,73 @@ class CliAcceptance(unittest.TestCase):
         self.assertEqual([f["rule"] for f in report["findings"]], ["MOCK_OUTPUT_MISMATCH"])
         self.assertEqual(report["summary"]["error_count"], 2)
         self.assertEqual(trace["adapter_invocations"], 1)
+
+
+    def test_boolean_false_does_not_match_zero_counts(self):
+        with tempfile.TemporaryDirectory() as scratch:
+            changed = json.loads(SCENARIO.read_text(encoding="utf-8"))
+            changed["files"]["logs/events.json"] = "[]"
+            changed["expected"].update(error_count=False, records=False)
+            path = Path(scratch) / "boolean-expectation.json"
+            path.write_text(json.dumps(changed), encoding="utf-8")
+            result, report, trace = self.invoke(scenario=path)
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(report["exit_code"], 1)
+        self.assertEqual([f["rule"] for f in report["findings"]], ["MOCK_OUTPUT_MISMATCH"])
+        self.assertEqual(report["summary"], {"error_count": 0, "records": 0, "sources": ["logs/events.json"]})
+        self.assertIs(type(report["summary"]["error_count"]), int)
+        self.assertEqual(trace["state"], "failed")
+        self.assertEqual(trace["adapter_invocations"], 1)
+
+    def test_numeric_zero_counts_pass_for_integer_and_float_expectations(self):
+        for expected in (0, 0.0):
+            with self.subTest(expected=expected), tempfile.TemporaryDirectory() as scratch:
+                changed = json.loads(SCENARIO.read_text(encoding="utf-8"))
+                changed["files"]["logs/events.json"] = "[]"
+                changed["expected"].update(error_count=expected, records=expected)
+                path = Path(scratch) / "zero-expectation.json"
+                path.write_text(json.dumps(changed), encoding="utf-8")
+                result, report, trace = self.invoke(scenario=path)
+            self.assertEqual(result.returncode, 0)
+            self.assertEqual(report["findings"], [])
+            self.assertEqual(trace["state"], "completed")
+            self.assertEqual(trace["adapter_invocations"], 1)
+            self.assertIs(type(report["summary"]["records"]), int)
+
+    def test_finite_overflow_input_is_exit_two_before_adapter(self):
+        for token in ("1e999", "-1e999"):
+            with self.subTest(token=token), tempfile.TemporaryDirectory() as scratch:
+                changed = json.loads(SCENARIO.read_text(encoding="utf-8"))
+                text = json.dumps(changed).replace('"error_count": 2', '"error_count": ' + token)
+                self.assertIn(token, text)
+                path = Path(scratch) / "overflow-expectation.json"
+                path.write_text(text, encoding="utf-8")
+                result, report, trace = self.invoke(scenario=path)
+            self.assertEqual(result.returncode, 2)
+            self.assertEqual(report["exit_code"], 2)
+            self.assertEqual([f["rule"] for f in report["findings"]], ["INPUT_JSON"])
+            self.assertEqual(trace["state"], "blocked")
+            self.assertEqual(trace["events"], [])
+            self.assertEqual(trace["adapter_invocations"], 0)
+            self.assertIsNone(report["summary"])
+
+
+class JsonComparisonAcceptance(unittest.TestCase):
+    def test_nested_boolean_number_mismatches_are_not_equal(self):
+        pairs = [
+            ({"items": [{"flag": False}]}, {"items": [{"flag": 0}]}),
+            ([{"nested": [True]}], [{"nested": [1.0]}]),
+        ]
+        for actual, expected in pairs:
+            with self.subTest(actual=actual, expected=expected):
+                self.assertFalse(json_equal(actual, expected))
+                self.assertFalse(json_equal(expected, actual))
+
+    def test_nested_same_types_and_finite_numeric_values_match(self):
+        self.assertTrue(json_equal({"items": [{"flag": False, "count": 0}], "other": None},
+                                   {"other": None, "items": [{"count": 0.0, "flag": False}]}))
+        self.assertFalse(json_equal({"items": [0, 1]}, {"items": [1, 0]}))
+        self.assertFalse(json_equal({"items": [0]}, {"items": [0, 0]}))
 
 
 if __name__ == "__main__":

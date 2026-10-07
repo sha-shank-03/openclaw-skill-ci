@@ -3,6 +3,7 @@
 import json
 
 from .inputs import valid_virtual_path
+from .json_values import json_equal
 from .model import Finding
 
 MAX_ACTIONS = 32
@@ -61,7 +62,7 @@ def run_fixture(scenario, declarations, policy, trace):
         final = {"error_count": sum(row["level"] == "error" for row in records),
                  "records": len(records), "sources": sources}
         trace["final"] = final
-        if final != scenario["expected"]:
+        if not json_equal(final, scenario["expected"]):
             fail("MOCK_OUTPUT_MISMATCH", "expected", "Observed summary does not match independently specified expected JSON.")
     trace["state"] = "failed" if findings else "completed"
     return final, findings

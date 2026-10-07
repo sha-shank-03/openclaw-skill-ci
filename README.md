@@ -102,6 +102,14 @@ syntax. M1 has only a virtual `read` adapter. A fixture scenario supplies text
 files, a finite action list, and independent expected final JSON; see
 `fixtures/scenarios/summary-pass.json`. There is no extensible code/plugin DSL.
 
+Expected-output comparison is recursive and type aware: booleans never match
+numbers, objects ignore key order, and arrays retain their order and length.
+Finite integers and floats are one numeric category, so `0` and `0.0` match;
+there is no comparison tolerance. Decimal/exponent tokens use Python's binary
+float representation and may lose decimal precision. The selected JSON reader
+rejects non-finite values, including exponent overflow such as `1e999`, with
+input exit 2 before adapter invocation.
+
 Environment fixtures supply platform, available binary names, environment
 variable **names**, and explicit boolean config paths. They predict readiness
 under that supplied state. They do not inspect your PATH, environment values,
