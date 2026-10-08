@@ -1,0 +1,18 @@
+{
+  "slug": "openclaw-skill-ci",
+  "label": "final-main-demo",
+  "argv": [
+    "<local-portfolio>\\openclaw-skill-ci\\.venv\\Scripts\\python.exe",
+    "scripts/demo.py",
+    "--out",
+    "work/main-final-demo-20261008"
+  ],
+  "cwd": "<local-portfolio>\\openclaw-skill-ci",
+  "started_at_utc": "2026-10-08T02:20:43.418695+00:00",
+  "duration_seconds": 2.015,
+  "exit_code": 0,
+  "timed_out": false,
+  "stdout": "PASS static expected_exit=0 execution_kind=static adapter_invocations=0\nPASS passing expected_exit=0 execution_kind=mock_fixture adapter_invocations=1\nPASS missing expected_exit=1 execution_kind=mock_fixture adapter_invocations=0\nPASS undeclared expected_exit=1 execution_kind=mock_fixture adapter_invocations=0\nPASS json5 expected_exit=0 execution_kind=mock_fixture adapter_invocations=1\nPASS installer expected_exit=1 execution_kind=mock_fixture adapter_invocations=0\nPASS replay expected_exit=0 execution_kind=recorded_replay adapter_invocations=0\nPASS wrong-replay expected_exit=1 execution_kind=recorded_replay adapter_invocations=0\nPASS denied-replay expected_exit=1 execution_kind=recorded_replay adapter_invocations=0\nPASS demo cases=9 model_execution=false source_trace_bytes_preserved=true out=<local-portfolio>\\openclaw-skill-ci\\work\\main-final-demo-20261008\n",
+  "stderr": "",
+  "scope": "independently executed by main; result alone does not imply full acceptance"
+}

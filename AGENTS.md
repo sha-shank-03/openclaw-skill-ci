@@ -1,12 +1,11 @@
-# Portfolio worker boundaries
-You own only this standalone repository: C:\Users\shash\Documents\CodexPortfolios\agentic-ai-2026-10-07\openclaw-skill-ci
-Your own coordination record directory is: C:\Users\shash\Documents\CodexPortfolios\agentic-ai-2026-10-07\coordination\workers\openclaw-skill-ci
-You are not alone in the workspace. Preserve other people's changes. Edit only your assigned repository and your own coordination record. Do not create additional worker chats or subagents.
-Research and submit PLAN.md before implementation. Wait for the main chat's accepted-plan assignment.
-Use current primary sources and pin protocol/dependency versions. Preserve factual source links and retrieval dates.
-Keep the phase local: no GitHub publication/pushes, deployments, purchased services, paid model calls, production changes, or secrets.
-Use Java or Python according to the problem. Include a deterministic offline/mock path where practical. Clearly label all mocks and recorded replay.
-Update your status.json at meaningful phase boundaries and before finishing a turn. Main-owned registry/decisions/acceptance/resource files are read-only to you.
-At most two resource-heavy portfolio processes at once. Before any heavyweight build, integration suite, large install/download, or Docker work, require a named lease for your slug in coordination/resources.json. Planning and lightweight unit tests need no lease.
-Acceptance requires runnable quickstart/demo, meaningful failure tests, architecture, original-contribution/limitations, license/dependency attribution, CI with no paid calls, and evidence commands/results/unexecuted checks.
-Independent verification belongs to the main chat. Do not weaken acceptance tests to force a pass.
+# Repository guidance
+
+Work within this standalone repository and preserve other contributors' changes. Read README.md, PLAN.md, docs/PROJECT_CONTEXT.md, the architecture/contracts documents and docs/INDEPENDENT_VERIFICATION.md before changing behavior.
+
+The agreed MVP is implemented and locally verified. Preserve its narrow scope, pinned dependencies/protocols, meaningful failure tests, licenses, fixtures and evidence. Prefer Java/Python choices already established here; avoid services/frameworks without a concrete need.
+
+Keep acceptance tests and authorization policy outside model control. Label deterministic mocks and recorded replay accurately. Record actual commands, exit codes, assertions and unexecuted checks; never invent adoption, guarantees or live-model results.
+
+Do not commit generated workspaces, caches, virtual environments, secrets or production data. Use a new demo output directory and bound expensive builds/processes. There is no dependency on the original private worker-chat coordination files.
+
+The initial publication is human-authorized. Future pushes, releases, deployments, purchases, real-account mutations and paid calls require authorization appropriate to that task. Run the documented checks needed for the change; keep CI free of paid model calls.

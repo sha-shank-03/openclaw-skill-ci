@@ -1,0 +1,31 @@
+{
+  "review_id": "FINAL",
+  "reviewed_at_utc": "2026-10-08T02:28:30.854350+00:00",
+  "status": "passed",
+  "summary": "Whole repository independently accepted for agreed local MVP.",
+  "assertions": "40 meaningful tests pass with zero skips. Main executes the fresh nine-case documented CLI demo: exits0/0/1/1/0/1/0/1/1, exact finding rules/states and literal4records2errors, one adapter for each successful mock and zero static/replay/blocked calls. Replay retains original synthetic_mock/unauthenticated origin and current zero/historical one call, preserves source trace bytes, and wrong expectation/policy fail. Input bytes and37 accepted source/evidence hashes are preserved.",
+  "inspection": "Main inspected native metadata/profile/parser, input/link/bounds, policy and virtual adapter/replay at M1/M2; now inspected the nine-case checker and three false-pass/preservation tests, README quickstarts, architecture/contracts/contribution/limits/provenance, MIT/MIT0/two dependency and action notice attribution, honest final evidence and prepared Windows/Linux CI. Existing venv/Python3.11.9/hash lock used with no install. Main byte-checks installed notice copies, CI pins/source/licenses, actual artifacts and versioned source manifest.",
+  "limitations": "Portable OpenClaw2026.9.8 profile0.2.0 is stricter/narrower than the native loader. In-memory fictional mock reads do not execute candidate instructions/code/installers or native OpenClaw/Node/models. Fixture eligibility does not inspect actual host readiness. Static installer declarations do not verify artifact availability/version/licenses/security. Replay is unauthenticated internal consistency, not live evaluation; no OS sandbox/concurrent hostile filesystem or general security guarantee. Hosted GitHub CI/actionlint/workflow engine, POSIX/Linux setup/runtime, live providers/production/security/performance execution remain unexecuted or outside scope. No install/download/push/publication/deployment performed by final main checks. Exact local source bytes retained.",
+  "source_file_count": 59,
+  "repository": "openclaw-skill-ci",
+  "scope": "Coordinating-agent review, separate from implementation worker; not third-party certification.",
+  "local_path_redaction": "Personal host prefixes replaced. Original receipt hashes below describe the unredacted local source; exports have separate hashes.",
+  "publication_change_scope": "README/AGENTS/contributor/context/evidence exports and ignore/attribute portability only. Runtime, tests, fixtures and dependency pins remain as accepted.",
+  "command_receipt_exports": [
+    {
+      "path": "docs/verification/main-command-00-final-main-tests.json",
+      "source_receipt_sha256": "4fe763d7927131300b0c30c129269ec9ee30c1a9852b6e27bc6fb0e7a2c05894",
+      "export_sha256": "5d854586ed34598ce9044d7f8c9963c3e16df54d6b6b70f50b4f59430a430794"
+    },
+    {
+      "path": "docs/verification/main-command-01-final-main-demo.json",
+      "source_receipt_sha256": "0fab9d2c4686ae893defa2434dcfeb693903f3d86c2e31dc147a41e62ac468ec",
+      "export_sha256": "840055b8f25a411c7e5356632e585490b927b7fdbe701eba5094daccd9365b0b"
+    },
+    {
+      "path": "docs/verification/main-command-02-final-main-dependency-health.json",
+      "source_receipt_sha256": "36156c6dee13e460434641c409cb6f373140c87d2432f555382da7b1a5b733f0",
+      "export_sha256": "393a22c7999420160a4f96b49610988e8d60f0d4d71d9f9275b13dac66eadaa5"
+    }
+  ]
+}

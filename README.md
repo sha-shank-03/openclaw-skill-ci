@@ -1,5 +1,9 @@
 # OpenClaw Skill CI
 
+[![CI](https://github.com/sha-shank-03/openclaw-skill-ci/actions/workflows/ci.yml/badge.svg)](https://github.com/sha-shank-03/openclaw-skill-ci/actions/workflows/ci.yml)
+
+Open-source MIT project. [Project context](docs/PROJECT_CONTEXT.md) · [Independent local verification](docs/INDEPENDENT_VERIFICATION.md) · [Contributing](CONTRIBUTING.md)
+
 Validate a local OpenClaw skill against a portable metadata profile and run
 synthetic behavior contracts before deploying it. This local MVP provides a
 Python CLI, YAML/JSON5 metadata and installer declaration checks, bounded bundle
@@ -247,3 +251,12 @@ and [final local evidence](docs/M3-EVIDENCE.md). See also
 [historical M1 design](docs/M1-DESIGN.md), [historical M1 evidence](docs/M1-EVIDENCE.md),
 [accepted planning scope](PLAN.md), and [dependency attribution](THIRD_PARTY_NOTICES.md).
 Code is MIT; independently authored examples and fixtures are MIT-0.
+
+## Get the source
+
+```sh
+git clone https://github.com/sha-shank-03/openclaw-skill-ci.git
+cd openclaw-skill-ci
+```
+
+Follow the quickstart above for runtime/dependency setup. Demos use fictional/mock data; initial dependency setup, where required, is separate from offline execution.
