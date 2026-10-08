@@ -1,10 +1,12 @@
 # OpenClaw Skill CI
 
 Validate a local OpenClaw skill against a portable metadata profile and run
-synthetic behavior contracts before deploying it. This **M2 slice** provides a
+synthetic behavior contracts before deploying it. This local MVP provides a
 Python CLI, YAML/JSON5 metadata and installer declaration checks, bounded bundle
 inspection, explicit prerequisites, a separately selected team policy, a closed
-mock read/summary workflow, and non-executing recorded replay. It targets the metadata subset in
+mock read/summary workflow, and non-executing recorded replay. The final M3 review
+package adds an asserting demo and prepared CI; runtime version 0.2.0 and its
+accepted M2 profile remain unchanged. It targets the metadata subset in
 OpenClaw **2026.9.8** at `fc23bc864e4553c2d215e479eeec47b67a0bf943`.
 
 The behavior runner is a scripted mock agent. It executes virtual reads and
@@ -14,7 +16,7 @@ candidate code, call a model, or connect to a Gateway. Its traces are labeled
 
 ## Quickstart on Windows
 
-Use PowerShell in the repository root and the existing Python 3.11 interpreter.
+Use PowerShell in the repository root and Python **3.11.9 x64**.
 No OpenClaw, Node, Docker, credentials, or model account is needed.
 
 ```powershell
@@ -29,9 +31,47 @@ The dependency download initially needs internet access. Copy a prepared
 wheelhouse to another machine and run the `--no-index` install for offline
 setup. Thereafter all CLI commands and tests are offline. The lock contains
 only Python 3.11 Windows AMD64 and Linux x86_64 wheels; source builds are excluded.
-On Linux use `python3.11 -m venv .venv`, `.venv/bin/python`, and `/` paths.
+If the existing `.venv` and cached wheels are already prepared, skip bootstrap
+and run the demo below directly. No download/install was needed for M3 locally.
 
-Expected passing fixture console output:
+## Assert the complete demo
+
+```powershell
+.\.venv\Scripts\python.exe scripts\demo.py
+```
+
+The demo invokes nine fixed CLI cases and returns 0 only when positive and
+expected-negative results match their literal exits, findings, summaries and
+execution labels. Cases cover static checks, passing and JSON5 mocks, missing
+prerequisites, undeclared access, unsafe installer metadata, recorded replay,
+changed expected output and changed policy. Replay must perform zero adapter
+calls and preserve the original trace bytes. No candidate code/model runs.
+
+The default creates a fresh `work/demo-<id>/` with per-case reports/traces and
+`summary.json`/`summary.md`. Set `--out work\demo-review` to choose a fresh path
+under `work/`. Existing paths are refused so a prior result cannot hide a failed
+new run. Expected negative case exits are handled by assertions; an incorrect
+negative result makes the demo fail. Expect a final `PASS demo cases=9` line.
+
+## POSIX quickstart (prepared; not executed locally)
+
+Use a Python 3.11.9 x64 Linux environment in the repository root. The locked
+Linux wheel is x86_64; other architectures/OSes are not included in this lock.
+
+```sh
+python3.11 -c "import sys; assert sys.version_info[:3] == (3, 11, 9), sys.version"
+python3.11 -m venv .venv
+.venv/bin/python -m pip --isolated --disable-pip-version-check download --index-url https://pypi.org/simple --only-binary=:all: --require-hashes --no-deps -r requirements.lock --dest work/wheelhouse
+.venv/bin/python -m pip --isolated --disable-pip-version-check install --no-index --find-links work/wheelhouse --only-binary=:all: --require-hashes --no-deps -r requirements.lock
+.venv/bin/python scripts/demo.py
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+For offline bootstrap, provide the prepared wheelhouse and skip its download
+line. The interpreter must already be installed. These POSIX setup/run commands
+and the prepared Linux CI job have not been executed on the assigned Windows HP.
+
+Expected passing fixture console output from the Windows command:
 
 ```text
 PASS execution_kind=mock_fixture model_execution=false
@@ -111,7 +151,9 @@ including passing counts, missing prerequisite, pre-invocation denial,
 independent policy denial, output mismatch, static-only behavior, and a bad
 caller input. M2 adds parsing, installer, link/traversal and exact numeric limit
 cases, missing/malformed logs, unavailable adapters, unknown versions and trace
-consistency/coverage failures. The 37 tests include the original 12 M1 tests.
+consistency/coverage failures. The 40 tests include the original 12 M1 tests,
+25 M2 tests, and three M3 asserting-demo tests. The latter reject wrong negative
+exits/findings and misleading replay labels/calls, and run the actual demo.
 Expected-negative demonstrations are also runnable individually.
 
 ## Supply your own contracts
@@ -187,10 +229,21 @@ model's instruction following. Ordinary containers would not remove all risk.
 Concurrent hostile filesystem mutation is outside the guarantee; inspect a
 stable checkout. Trace provenance is unauthenticated. Replay accepts only this
 project's M2 trace v1 shape; older M1 traces lack required recorded evidence and
-cannot be reconstructed. Hosted CI is deferred to M3. No hosted CI or live
-OpenClaw execution has been claimed.
+cannot be reconstructed. No hosted CI, POSIX run or live OpenClaw execution has
+been claimed.
 
-See [M2 design](docs/M2-DESIGN.md), [M2 observed evidence](docs/M2-EVIDENCE.md),
+The prepared [.github/workflows/ci.yml](.github/workflows/ci.yml) uses full
+checkout/setup-python commit pins, Windows 2022 and Ubuntu 24.04 runners,
+Python 3.11.9 x64, and the existing hash-locked binary dependencies. It runs the
+same unit/CLI suite and asserting demo with read-only job permissions. Setup
+requires trusted interpreter/package downloads; tests and demo are offline and
+require no model credentials, paid API or service accounts. The workflow is
+prepared for publication later; no hosted run is inferred from local results.
+
+Start review with [architecture and contribution](docs/ARCHITECTURE.md),
+[contracts and limits](docs/CONTRACTS.md), [version/source provenance](docs/PROVENANCE.md),
+and [final local evidence](docs/M3-EVIDENCE.md). See also
+[M2 design](docs/M2-DESIGN.md), [historical M2 evidence](docs/M2-EVIDENCE.md),
 [historical M1 design](docs/M1-DESIGN.md), [historical M1 evidence](docs/M1-EVIDENCE.md),
 [accepted planning scope](PLAN.md), and [dependency attribution](THIRD_PARTY_NOTICES.md).
 Code is MIT; independently authored examples and fixtures are MIT-0.

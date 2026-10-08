@@ -1,0 +1,41 @@
+name: Offline skill contracts
+
+"on":
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5, MIT
+        with:
+          persist-credentials: false
+      - name: Python 3.11.9 x64
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6, MIT
+        with:
+          python-version: "3.11.9"
+          architecture: x64
+      - name: Verify interpreter
+        run: python -c "import sys; assert sys.version_info[:3] == (3, 11, 9), sys.version"
+      - name: Install only hash-locked binary dependencies
+        run: >-
+          python -m pip --isolated --disable-pip-version-check install --index-url https://pypi.org/simple --only-binary=:all: --require-hashes --no-deps -r requirements.lock
+      - name: Dependency health
+        run: python -m pip --isolated --disable-pip-version-check check
+      - name: Unit and CLI acceptance
+        run: python -m unittest discover -s tests -v
+      - name: Assert positive and expected-negative examples
+        run: python scripts/demo.py --out work/ci-demo
+      - name: Add demo result to job summary
+        run: python -c "import os; from pathlib import Path; Path(os.environ['GITHUB_STEP_SUMMARY']).open('a', encoding='utf-8').write(Path('work/ci-demo/summary.md').read_text(encoding='utf-8'))"

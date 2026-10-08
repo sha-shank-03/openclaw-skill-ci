@@ -1,6 +1,6 @@
 # Dependency and reference attribution
 
-M1/M2 use two pinned distributions from their official PyPI metadata, retrieved
+M1/M2/M3 use the same two pinned distributions from official PyPI metadata, retrieved
 2026-10-07. Installation uses binary wheels, SHA-256 checks, and no dependencies.
 There are no selected runtime transitive dependencies.
 
@@ -28,5 +28,13 @@ Official reference material, read during planning, is linked and paraphrased:
 
 Examples and fixtures are independently authored fictional content under MIT-0.
 OpenClaw is an external project; no endorsement, affiliation, or security
-certification is claimed. Planned GitHub Actions are deferred to M3 and are not
-installed or used in M1/M2.
+certification is claimed.
+
+The M3 prepared CI workflow pins `actions/checkout` v5 at
+`fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09` and `actions/setup-python` v6 at
+`ece7cb06caefa5fff74198d8649806c4678c61a1`. Both are MIT, Copyright GitHub Inc.
+and contributors; their full pinned LICENSE records captured during planning
+are copied to `licenses/actions-checkout-LICENSE.txt` and
+`licenses/actions-setup-python-LICENSE.txt`. These Actions have not been run
+locally or in hosted CI. No Action implementation code is vendored. See
+[version/source provenance](docs/PROVENANCE.md) for pins and execution boundaries.
